@@ -9,7 +9,6 @@ export const usePortfolio = () => {
     try {
       if (!saved) return defaultStructure;
       const parsed = JSON.parse(saved);
-      // Scalanie starego formatu z nowym (dodanie tablicy dywidend jeśli jej nie ma)
       return {
         ...defaultStructure,
         ...parsed,
@@ -23,7 +22,6 @@ export const usePortfolio = () => {
     localStorage.setItem("invest_dash_data", JSON.stringify(store));
   }, [store]);
 
-  // Funkcja dodawania raportu (została bez zmian, ale wewnątrz setStore dbamy o resztę stanu)
   const addReport = (
     year: number,
     month: number,
@@ -57,12 +55,10 @@ export const usePortfolio = () => {
     };
 
     setStore((prev) => ({
-      ...prev, // Zachowujemy plannedDividends
+      ...prev,
       reports: { ...prev.reports, [id]: newReport },
     }));
   };
-
-  // --- NOWE FUNKCJE DLA DYWIDEND ---
 
   const addPlannedDividend = (dividend: Dividend) => {
     setStore((prev) => ({
@@ -78,7 +74,6 @@ export const usePortfolio = () => {
     }));
   };
 
-  // Funkcja do masowego dodawania dywidend z Excela (tych typu 'received')
   const addReceivedDividends = (dividends: Dividend[]) => {
     setStore((prev) => {
       const existingIds = new Set(prev.plannedDividends.map((d) => d.id));
@@ -91,11 +86,52 @@ export const usePortfolio = () => {
     });
   };
 
+  const exportData = () => {
+    const dataStr = JSON.stringify(store, null, 2);
+    const dataUri =
+      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+    const exportFileDefaultName = `invest-dash-backup-${new Date().toISOString().split("T")[0]}.json`;
+
+    const linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", exportFileDefaultName);
+    linkElement.click();
+  };
+
+  const importData = (file: File): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const content = e.target?.result as string;
+          const parsed = JSON.parse(content);
+
+          if (parsed.reports && parsed.plannedDividends) {
+            setStore(parsed);
+            resolve(true);
+          } else {
+            throw new Error("Nieprawidłowy format pliku");
+          }
+        } catch (err) {
+          console.error("Błąd podczas importu:", err);
+          reject(false);
+        }
+      };
+
+      reader.onerror = () => reject(false);
+      reader.readAsText(file);
+    });
+  };
+
   return {
     store,
     addReport,
     addPlannedDividend,
     removePlannedDividend,
     addReceivedDividends,
+    exportData,
+    importData,
   };
 };

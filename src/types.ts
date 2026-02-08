@@ -33,3 +33,16 @@ export interface PortfolioStore {
   reports: Record<string, MonthData>;
   plannedDividends: Dividend[];
 }
+
+export type SortOrder = "asc" | "desc";
+export type PortfolioSortKeys =
+  | "symbol"
+  | "purchaseValue"
+  | "profit"
+  | "currPrice";
+export type DividendSortKeys = "symbol" | "payDate" | "totalAmount";
+
+export interface ViewState {
+  type: "years" | "months" | "details";
+  id?: number | string;
+}
