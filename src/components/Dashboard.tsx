@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Wallet,
   PieChart,
@@ -15,11 +15,10 @@ import {
   YAxis,
   Rectangle,
 } from "recharts";
-import { MonthData, OpenPosition } from "../types";
+import { MonthData, OpenPosition, SortOrder } from "../types";
 import { usePortfolio } from "../hooks/usePortfolio";
 
 type SortKeys = "purchaseValue" | "monthlyProfitDelta" | "profit";
-type SortOrder = "asc" | "desc";
 
 interface DashboardProps {
   report: MonthData;

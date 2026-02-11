@@ -1,4 +1,3 @@
-import React from "react";
 import { BarChart3, Target, Trophy } from "lucide-react";
 import {
   BarChart,

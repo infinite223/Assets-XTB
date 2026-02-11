@@ -135,7 +135,7 @@ export const YearsPage = () => {
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault(); // Zapobiega otwarciu pliku w przeglądarce
+    e.preventDefault();
     setIsDragging(true);
   };
 
@@ -149,7 +149,6 @@ export const YearsPage = () => {
 
     const file = e.dataTransfer.files?.[0];
     if (file && file.name.endsWith(".xlsx")) {
-      // Wywołujemy Twoją logikę (tą samą co w onChange)
       setPendingFile(file);
       setIsModalOpen(true);
     }

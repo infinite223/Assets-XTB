@@ -54,7 +54,6 @@ export const PortfolioTable = ({
         </div>
       </div>
 
-      {/* WARUNKOWE RENDEROWANIE TREŚCI TABELI */}
       <div
         className={`transition-all duration-300 ease-in-out ${isExpanded ? "opacity-100" : "max-h-0 opacity-0 pointer-events-none"}`}
       >

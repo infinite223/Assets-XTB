@@ -31,7 +31,6 @@ export const DividendSection = ({
   sortConfig,
   onRequestSort,
 }: DividendSectionProps) => {
-  // Stan zwijania tabeli harmonogramu
   const [isTableExpanded, setIsTableExpanded] = useState(true);
 
   const yearlyTotals = useMemo(() => {
