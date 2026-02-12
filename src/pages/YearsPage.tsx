@@ -211,7 +211,7 @@ export const YearsPage = () => {
   ).sort((a, b) => b - a);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 p-6 md:p-10 font-sans text-slate-900 dark:text-slate-100 pb-32 transition-colors duration-300">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 p-6 px-3 md:p-10 font-sans text-slate-900 dark:text-slate-100 pb-32 transition-colors duration-300">
       {store.isFirstVisit && <WelcomeModal onClose={completeFirstVisit} />}
 
       <header className="max-w-7xl mx-auto mb-8 md:mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 px-2 md:px-0">

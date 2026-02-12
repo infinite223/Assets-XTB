@@ -73,7 +73,7 @@ export const MonthsPage = () => {
   const yearlyStats = calculateYearlyStats(currentYear);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 p-6 md:p-10 font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 p-6 px-3 md:p-10 font-sans transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Przycisk Powrotu */}
         <button

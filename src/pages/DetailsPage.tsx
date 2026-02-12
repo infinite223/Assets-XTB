@@ -27,7 +27,7 @@ export const DetailsPage = () => {
 
   if (!activeReport) {
     return (
-      <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 flex flex-col items-center justify-center p-6 transition-colors duration-300">
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-slate-950 flex flex-col items-center justify-center p-6 px-3 transition-colors duration-300">
         <h2 className="text-2xl font-black text-slate-800 dark:text-white mb-4">
           Nie znaleziono raportu
         </h2>
