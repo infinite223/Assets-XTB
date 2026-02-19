@@ -22,14 +22,14 @@ export const BottomNav = ({
       }`}
     >
       <Icon size={24} strokeWidth={isActive(path) ? 3 : 2} />
-      <span className="text-[10px] font-black uppercase tracking-tighter">
+      {/* <span className="text-[10px] font-black uppercase tracking-tighter">
         {label}
-      </span>
+      </span> */}
     </Link>
   );
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-8 pt-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800">
+    <div className="fixed bottom-0 left-0 right-0 z-50 px-2 pb-8 pt-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800">
       <div className="max-w-lg mx-auto flex justify-between items-center">
         {navItem("/", Home, "Home")}
         {navItem("/history", Calendar, "Lata")}
@@ -48,7 +48,7 @@ export const BottomNav = ({
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="bg-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-indigo-200 dark:shadow-none -translate-y-6 active:scale-90 transition-transform flex items-center justify-center"
+            className="bg-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-indigo-200 dark:shadow-none active:scale-90 transition-transform flex items-center justify-center"
           >
             <Plus size={28} strokeWidth={3} />
           </button>

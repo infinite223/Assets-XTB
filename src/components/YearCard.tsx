@@ -10,7 +10,7 @@ interface YearCardProps {
 export const YearCard = ({ year, stats, count, onClick }: YearCardProps) => (
   <div
     onClick={onClick}
-    className="bg-white dark:bg-slate-900/50 p-6 md:p-7 rounded-[30px] md:rounded-[40px] shadow-sm dark:shadow-xl border border-slate-100 dark:border-slate-800 cursor-pointer hover:shadow-xl dark:hover:shadow-indigo-500/10 hover:-translate-y-1.5 transition-all group flex flex-col justify-between min-h-[220px] md:min-h-[260px]"
+    className="bg-white dark:bg-slate-900 p-6 md:p-7 rounded-[30px] md:rounded-[40px] shadow-sm dark:shadow-xl border border-slate-100 dark:border-slate-800 cursor-pointer hover:shadow-xl dark:hover:shadow-indigo-500/10 hover:-translate-y-1.5 transition-all group flex flex-col justify-between min-h-[220px] md:min-h-[260px]"
   >
     <div className="flex justify-between items-start">
       <div className="h-10 w-10 md:h-12 md:w-12 bg-indigo-50 dark:bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform">

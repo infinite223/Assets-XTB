@@ -25,13 +25,10 @@ export const DividendsPage = () => {
     return allReports[0]?.positions || [];
   }, [store.reports]);
 
-  // Obliczanie danych do tabeli dywidend (logika z YearsPage)
   const sortedDividends = useMemo(() => {
     const baseDividends = [...(store.plannedDividends || [])].map((div) => {
-      // Jeśli dywidenda jest już otrzymana, ma stałą kwotę
       if (div.status === "received" && div.totalAmount) return div;
 
-      // Jeśli planowana, szukamy aktualnej ceny akcji w portfelu, by wyliczyć prognozowaną kwotę
       const pos = latestPositions.find((p) => p.symbol === div.symbol);
       if (pos) {
         const currPrice =
@@ -66,7 +63,6 @@ export const DividendsPage = () => {
     });
   }, [store.plannedDividends, latestPositions, divSort]);
 
-  // Statystyki ogólne dywidend
   const divStats = useMemo(() => {
     const received = sortedDividends
       .filter((d) => d.status === "received")
@@ -93,7 +89,6 @@ export const DividendsPage = () => {
         </h1>
       </header>
 
-      {/* Mini Dashboard Dywidendowy */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
         <div className="bg-white dark:bg-slate-900 p-6 rounded-[30px] border border-slate-100 dark:border-slate-800 shadow-sm">
           <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">
@@ -124,8 +119,7 @@ export const DividendsPage = () => {
         </div>
       </div>
 
-      {/* Komponent sekcji dywidend (Tabela + Wykres + Formularz) */}
-      <div className="bg-white dark:bg-slate-900 rounded-[40px] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+      <div className="overflow-hidden">
         <DividendSection
           dividends={sortedDividends}
           form={divForm}

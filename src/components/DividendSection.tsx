@@ -100,7 +100,7 @@ export const DividendSection = ({
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6 md:space-y-10 mt-4 md:mt-8 px-2 md:px-0">
+    <div className="max-w-7xl mx-auto space-y-6 md:space-y-10 mt-4 md:mt-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-10">
         <div className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[30px] md:rounded-[40px] shadow-sm border border-slate-100 dark:border-slate-800 h-fit">
           <h3 className="text-lg md:text-xl font-black mb-4 md:mb-6 flex items-center gap-2 text-slate-800 dark:text-white uppercase italic tracking-tighter">

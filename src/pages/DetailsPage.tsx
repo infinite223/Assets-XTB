@@ -71,7 +71,7 @@ export const DetailsPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto px-2 md:px-8">
         <Dashboard report={{ ...activeReport, monthlyNetGain: currentDelta }} />
       </div>
     </div>

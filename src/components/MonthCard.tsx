@@ -1,4 +1,4 @@
-import { Calendar } from "lucide-react";
+import { Calendar, Folder } from "lucide-react";
 
 interface MonthCardProps {
   reportId: string | number;
@@ -20,8 +20,8 @@ export const MonthCard = ({
       className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-[30px] md:rounded-[40px] shadow-sm border border-slate-100 dark:border-slate-800 cursor-pointer hover:shadow-2xl hover:shadow-indigo-500/10 hover:-translate-y-2 transition-all group"
     >
       <div className="flex justify-between items-center mb-6">
-        <div className="h-10 w-10 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-center text-indigo-500 dark:text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white dark:group-hover:bg-indigo-500 transition-colors">
-          <Calendar size={20} />
+        <div className="h-10 w-10 md:h-12 md:w-12 bg-indigo-50 dark:bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform">
+          <Calendar className="w-5 h-5 md:w-6 md:h-6" />
         </div>
 
         <div

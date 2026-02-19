@@ -8,7 +8,6 @@ export const HistoryPage = () => {
   const navigate = useNavigate();
   const { store } = usePortfolio();
 
-  // Funkcja pomocnicza do pobierania raportu z poprzedniego miesiąca (potrzebna do delty)
   const getPreviousMonthReport = (year: number, month: number) => {
     const allReports = Object.values(store.reports);
     return allReports.find((r) => {
@@ -17,7 +16,6 @@ export const HistoryPage = () => {
     });
   };
 
-  // Obliczanie zysku m/m dla konkretnego raportu
   const calculateMonthlyDelta = (currentReport: any) => {
     const prevReport = getPreviousMonthReport(
       currentReport.year,
@@ -27,19 +25,16 @@ export const HistoryPage = () => {
     return currentReport.totalProfit - prevReport.totalProfit;
   };
 
-  // Logika obliczania statystyk dla całego roku
   const calculateYearlyStats = (year: number) => {
     const yearReports = Object.values(store.reports).filter(
       (r) => r.year === year,
     );
 
-    // Suma zysków ze wszystkich miesięcy w danym roku
     const yearlyDelta = yearReports.reduce(
       (sum, r) => sum + calculateMonthlyDelta(r),
       0,
     );
 
-    // Pobieramy ostatni dostępny raport w roku, żeby sprawdzić kapitał
     const latestInYear = [...yearReports].sort((a, b) => b.month - a.month)[0];
 
     return {
@@ -50,7 +45,6 @@ export const HistoryPage = () => {
     };
   };
 
-  // Pobranie unikalnych lat i posortowanie ich malejąco
   const years = Array.from(
     new Set(Object.values(store.reports).map((r) => r.year)),
   ).sort((a, b) => b - a);
@@ -97,7 +91,6 @@ export const HistoryPage = () => {
         </div>
       )}
 
-      {/* Info sekcja na dole */}
       <div className="mt-12 p-6 bg-slate-100 dark:bg-slate-800/50 rounded-[30px] border border-slate-200 dark:border-slate-800">
         <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">
           Jak czytać historię?
