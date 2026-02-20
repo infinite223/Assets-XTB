@@ -12,9 +12,10 @@ export const BottomNav = ({
 
   const isActive = (path: string) => location.pathname === path;
 
-  const navItem = (path: string, Icon: any, label: string) => (
+  const navItem = (path: string, Icon: any, label: string, id?: string) => (
     <Link
       to={path}
+      id={id}
       className={`flex flex-col items-center justify-center w-16 gap-1 transition-all ${
         isActive(path)
           ? "text-indigo-600 dark:text-indigo-400 scale-105"
@@ -31,8 +32,8 @@ export const BottomNav = ({
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 px-2 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800">
       <div className="max-w-lg mx-auto flex justify-between items-center">
-        {navItem("/", Home, "Home")}
-        {navItem("/history", Calendar, "Lata")}
+        {navItem("/", Home, "Home", "nav-home")}
+        {navItem("/history", Calendar, "Lata", "nav-history")}
 
         <div className="flex items-center justify-center w-16 h-12">
           <input
@@ -47,6 +48,7 @@ export const BottomNav = ({
             accept=".xlsx"
           />
           <button
+            id="nav-plus"
             onClick={() => fileInputRef.current?.click()}
             className="bg-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-indigo-200 dark:shadow-none active:scale-90 transition-transform flex items-center justify-center"
           >
@@ -54,8 +56,8 @@ export const BottomNav = ({
           </button>
         </div>
 
-        {navItem("/dividends", DollarSign, "Dywidendy")}
-        {navItem("/settings", Settings, "Opcje")}
+        {navItem("/dividends", DollarSign, "Dywidendy", "nav-dividends")}
+        {navItem("/settings", Settings, "Opcje", "nav-settings")}
       </div>
     </div>
   );

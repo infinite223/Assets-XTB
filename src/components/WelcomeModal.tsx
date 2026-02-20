@@ -60,7 +60,6 @@ export const WelcomeModal = ({ onClose }: { onClose: () => void }) => {
                 </div>
               </div>
 
-              {/* Krok 2 */}
               <div className="flex gap-3 md:gap-4 p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50">
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <Upload size={16} className="md:w-5 md:h-5" />
@@ -75,7 +74,6 @@ export const WelcomeModal = ({ onClose }: { onClose: () => void }) => {
                 </div>
               </div>
 
-              {/* Krok 3 */}
               <div className="flex gap-3 md:gap-4 p-3 md:p-4 rounded-xl md:rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50">
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                   <PieChart size={16} className="md:w-5 md:h-5" />

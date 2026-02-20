@@ -1,10 +1,10 @@
 export interface OpenPosition {
   symbol: string;
   volume: number;
-  purchaseValue: number; // Całkowity koszt zakupu (ilość * cena)
-  currentValue: number; // Aktualna wartość (ilość * cena rynkowa)
-  avgPurchasePrice: number; // Średnia cena kupna 1 akcji
-  currentPrice: number; // Aktualny kurs 1 akcji
+  purchaseValue: number;
+  currentValue: number;
+  avgPurchasePrice: number;
+  currentPrice: number;
   profit: number;
   openTime: Date;
 }

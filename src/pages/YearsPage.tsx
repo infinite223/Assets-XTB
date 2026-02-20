@@ -83,18 +83,15 @@ export const YearsPage = () => {
 
     const latestReport = allReports[allReports.length - 1];
 
-    // 1. Zysk tylko z kursu akcji (Monthly Delta sum)
     const stockProfit = allReports.reduce(
       (sum, r) => sum + calculateMonthlyDelta(r),
       0,
     );
 
-    // 2. Zysk z dywidend (wszystkie otrzymane)
     const dividendProfit = (store.plannedDividends || [])
       .filter((d) => d.status === "received")
       .reduce((sum, d) => sum + (d.totalAmount || 0), 0);
 
-    // 3. Łączny zysk
     const totalAbsoluteProfit = stockProfit + dividendProfit;
 
     const sortedPositions = [...latestReport.positions].sort((a, b) => {
@@ -274,9 +271,7 @@ export const YearsPage = () => {
               Stan Portfela (Podsumowanie Główne)
             </h3>
 
-            {/* Główny Grid Statystyk */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {/* 1. Zainwestowane */}
               <div className="bg-slate-50/50 dark:bg-slate-800/50 p-5 rounded-[25px] border border-slate-100/50 dark:border-slate-700/50">
                 <p className="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase mb-1 tracking-widest">
                   Zainwestowane
@@ -289,7 +284,6 @@ export const YearsPage = () => {
                 </p>
               </div>
 
-              {/* 2. Zysk z Akcji */}
               <div className="bg-slate-50/50 dark:bg-slate-800/50 p-5 rounded-[25px] border border-slate-100/50 dark:border-slate-700/50">
                 <p className="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase mb-1 tracking-widest">
                   Zysk z akcji
@@ -303,7 +297,6 @@ export const YearsPage = () => {
                 </p>
               </div>
 
-              {/* 3. Zysk z Dywidend */}
               <div className="bg-slate-50/50 dark:bg-slate-800/50 p-5 rounded-[25px] border border-slate-100/50 dark:border-slate-700/50">
                 <p className="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase mb-1 tracking-widest">
                   Dywidendy
@@ -314,7 +307,6 @@ export const YearsPage = () => {
                 </p>
               </div>
 
-              {/* 4. Łączny Wynik & ROI */}
               <div className="bg-indigo-600 dark:bg-indigo-500 p-5 rounded-[25px] shadow-lg shadow-indigo-200 dark:shadow-none text-white">
                 <p className="text-[9px] font-black text-indigo-100 uppercase mb-1 tracking-widest">
                   Wynik Całkowity

@@ -16,6 +16,7 @@ import {
   processOpenPositions,
 } from "./utils/excelParser";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { Tutorial } from "./components/Tutorial";
 
 export default function App() {
   const { addReport, addPlannedDividend } = usePortfolio();
@@ -74,6 +75,7 @@ export default function App() {
         </Routes>
 
         <BottomNav onFileSelect={handleFileSelect} />
+        <Tutorial />
 
         <UploadModal
           isOpen={isModalOpen}

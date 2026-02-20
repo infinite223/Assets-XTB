@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CalendarDays, History } from "lucide-react";
 import { usePortfolio } from "../hooks/usePortfolio";

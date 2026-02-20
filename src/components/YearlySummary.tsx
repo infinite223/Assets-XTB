@@ -43,7 +43,6 @@ export const YearlySummary = ({
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Kapitał */}
             <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-[25px] transition-colors">
               <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">
                 Kapitał (Max)
@@ -54,7 +53,6 @@ export const YearlySummary = ({
               </p>
             </div>
 
-            {/* ROI */}
             <div className="bg-indigo-600 dark:bg-indigo-500 p-6 rounded-[25px] text-white shadow-lg shadow-indigo-100 dark:shadow-none transition-colors">
               <p className="text-[10px] font-black text-indigo-200 dark:text-indigo-100 uppercase tracking-widest mb-1">
                 ROI Roczne
@@ -65,7 +63,6 @@ export const YearlySummary = ({
               </div>
             </div>
 
-            {/* Zysk Roczny */}
             <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-[25px] transition-colors">
               <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">
                 Zysk Roczny
@@ -83,7 +80,6 @@ export const YearlySummary = ({
               </p>
             </div>
 
-            {/* Najlepszy Miesiąc */}
             {bestMonth && (
               <div className="bg-amber-50 dark:bg-amber-900/20 p-6 rounded-[25px] border border-amber-100 dark:border-amber-900/30 transition-colors">
                 <p className="text-[10px] font-black text-amber-500 dark:text-amber-400 uppercase tracking-widest mb-1">
@@ -101,7 +97,6 @@ export const YearlySummary = ({
           </div>
         </div>
 
-        {/* Wykres */}
         <div className="flex-1 min-h-[300px]">
           <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6 text-center lg:text-left">
             Historia zysków (m/m)
