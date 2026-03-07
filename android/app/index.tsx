@@ -76,7 +76,9 @@ export default function HomePage() {
         <View className="mb-6 h-20 w-20 items-center justify-center rounded-full bg-slate-100">
           <Briefcase size={32} />
         </View>
-        <Text className="mb-2 text-xl font-black uppercase italic text-slate-800">Brak danych</Text>
+        <Text className="mb-2 text-[30px] font-black uppercase italic text-slate-800">
+          Brak danych
+        </Text>
       </View>
     );
   }
