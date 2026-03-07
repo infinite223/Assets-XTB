@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { View } from 'react-native';
 import { Slot } from 'expo-router';
 import { usePortfolio } from '../hooks/usePortfolio';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import {
   processOpenPositions,
   processClosedPositions,
   processDividendsFromExcel,
 } from '../utils/excelParser';
-import { UploadModal } from 'componenets/UploadModal';
-import { BottomNav } from 'componenets/BottomNav';
+import { UploadModal } from 'components/UploadModal';
+import { BottomNav } from 'components/BottomNav';
 import '../global.css';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function RootLayout() {
   const { addReport, addPlannedDividend } = usePortfolio();
@@ -49,25 +49,24 @@ export default function RootLayout() {
       setPendingFileUri(null);
     } catch (error) {
       console.error('Błąd przetwarzania:', error);
-      // Użyj Alert z 'react-native' zamiast window.alert
     }
   };
 
   return (
-    <View style={{ flex: 1, paddingBottom: 100 }}>
-      <Slot />
-
-      <BottomNav onFileSelect={handleFileSelect} />
-
-      <UploadModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onUpload={handleUpload}
-        selectedYear={selectedYear}
-        setSelectedYear={setSelectedYear}
-        selectedMonth={selectedMonth}
-        setSelectedMonth={setSelectedMonth}
-      />
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Slot />
+        <BottomNav onFileSelect={handleFileSelect} />
+        <UploadModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onUpload={handleUpload}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
+        />
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+import * as DocumentPicker from 'expo-document-picker';
+import { Alert } from 'react-native';
 import { MonthData, OpenPosition, PortfolioStore, Dividend } from '../types';
 
 const STORAGE_KEY = 'invest_dash_data';
@@ -16,11 +20,9 @@ export const usePortfolio = () => {
     const loadData = async () => {
       try {
         const saved = await AsyncStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          setStore(JSON.parse(saved));
-        }
+        if (saved) setStore(JSON.parse(saved));
       } catch (e) {
-        console.error('Błąd ładowania danych:', e);
+        console.error(e);
       } finally {
         setIsLoaded(true);
       }
@@ -30,14 +32,7 @@ export const usePortfolio = () => {
 
   useEffect(() => {
     if (isLoaded) {
-      const saveData = async () => {
-        try {
-          await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(store));
-        } catch (e) {
-          console.error('Błąd zapisu danych:', e);
-        }
-      };
-      saveData();
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(store)).catch(console.error);
     }
   }, [store, isLoaded]);
 
@@ -50,10 +45,8 @@ export const usePortfolio = () => {
     const id = `${year}-${month.toString().padStart(2, '0')}`;
     const totalInvested = positions.reduce((sum, p) => sum + p.purchaseValue, 0);
     const totalProfit = positions.reduce((sum, p) => sum + p.profit, 0);
-
     const prevMonthId =
       month === 1 ? `${year - 1}-12` : `${year}-${(month - 1).toString().padStart(2, '0')}`;
-
     const prevReport = store.reports[prevMonthId];
     const monthlyNetGain = prevReport ? totalProfit - prevReport.totalProfit : totalProfit;
 
@@ -88,15 +81,6 @@ export const usePortfolio = () => {
     }));
   };
 
-  const resetAllData = async () => {
-    try {
-      await AsyncStorage.removeItem(STORAGE_KEY);
-      setStore({ reports: {}, plannedDividends: [], isFirstVisit: true });
-    } catch (e) {
-      console.error('Błąd resetowania:', e);
-    }
-  };
-
   const addReceivedDividends = (dividends: Dividend[]) => {
     setStore((prev) => {
       const existingIds = new Set(prev.plannedDividends.map((d) => d.id));
@@ -112,6 +96,52 @@ export const usePortfolio = () => {
     setStore((prev) => ({ ...prev, isFirstVisit: false }));
   };
 
+  const resetAllData = async () => {
+    Alert.alert('Potwierdzenie', 'Czy na pewno usunąć wszystkie dane?', [
+      { text: 'Anuluj', style: 'cancel' },
+      {
+        text: 'Usuń',
+        style: 'destructive',
+        onPress: async () => {
+          await AsyncStorage.removeItem(STORAGE_KEY);
+          setStore({ reports: {}, plannedDividends: [], isFirstVisit: true });
+        },
+      },
+    ]);
+  };
+
+  const exportData = async () => {
+    try {
+      const fileUri = (FileSystem as any).documentDirectory + 'portfolio_backup.json';
+      await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(store, null, 2));
+      await Sharing.shareAsync(fileUri, {
+        mimeType: 'application/json',
+        dialogTitle: 'Eksportuj dane',
+      });
+    } catch (e) {
+      Alert.alert('Błąd', 'Nie udało się wyeksportować danych.');
+    }
+  };
+
+  const importData = async (): Promise<boolean> => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({ type: 'application/json' });
+      if (result.canceled) return false;
+
+      const fileContent = await FileSystem.readAsStringAsync(result.assets[0].uri);
+      const parsed = JSON.parse(fileContent);
+
+      if (parsed.reports && parsed.plannedDividends) {
+        setStore(parsed);
+        return true;
+      }
+      throw new Error('Nieprawidłowy format');
+    } catch (e) {
+      Alert.alert('Błąd', 'Nie udało się zaimportować pliku.');
+      return false;
+    }
+  };
+
   return {
     store,
     isLoaded,
@@ -121,5 +151,7 @@ export const usePortfolio = () => {
     addReceivedDividends,
     completeFirstVisit,
     resetAllData,
+    exportData,
+    importData,
   };
 };

@@ -36,7 +36,7 @@ export const BottomNav = ({ onFileSelect }: { onFileSelect: (uri: string) => voi
   );
 };
 
-const NavItem = ({ href, icon: Icon, active }: any) => (
+const NavItem = ({ href, icon: Icon, active }: any) => (  
   <Link href={href} asChild>
     <TouchableOpacity style={styles.navItem}>
       <Icon size={24} color={active ? '#6366f1' : '#94a3b8'} strokeWidth={active ? 3 : 2} />

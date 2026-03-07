@@ -2,8 +2,8 @@ import React, { useMemo, useState } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
 import { Briefcase, TrendingUp, DollarSign } from 'lucide-react-native';
 import { usePortfolio } from '../hooks/usePortfolio';
-// import { PortfolioTable } from "../components/PortfolioTable";
 import { PortfolioSortKeys, SortOrder } from '../types';
+import { PortfolioTable } from 'components/PortfolioTable';
 
 export default function HomePage() {
   const { store } = usePortfolio();
@@ -134,16 +134,16 @@ export default function HomePage() {
         </View>
       </View>
 
-      {/* <PortfolioTable
+      <PortfolioTable
         positions={globalStats.latestPositions}
         sortConfig={portfolioSort}
         onRequestSort={(key) =>
           setPortfolioSort((prev) => ({
             key,
-            order: prev.key === key && prev.order === "desc" ? "asc" : "desc",
+            order: prev.key === key && prev.order === 'desc' ? 'asc' : 'desc',
           }))
         }
-      /> */}
+      />
     </ScrollView>
   );
 }

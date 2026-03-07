@@ -23,9 +23,6 @@ export const BottomNav = ({
       }`}
     >
       <Icon size={24} strokeWidth={isActive(path) ? 3 : 2} />
-      {/* <span className="text-[10px] font-black uppercase tracking-tighter">
-        {label}
-      </span> */}
     </Link>
   );
 

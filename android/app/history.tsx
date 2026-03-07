@@ -3,7 +3,7 @@ import { View, Text, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import { History, CalendarDays } from 'lucide-react-native';
 import { usePortfolio } from '../hooks/usePortfolio';
-import { YearCard } from 'componenets/YearCard';
+import { YearCard } from 'components/YearCard';
 
 export default function HistoryPage() {
   const router = useRouter();
