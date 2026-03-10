@@ -56,7 +56,7 @@ export const PortfolioTable = ({ positions, sortConfig, onRequestSort }: Portfol
   );
 
   return (
-    <View className="mb-8 px-4">
+    <View className="mb-8">
       <View className="mb-6 overflow-hidden rounded-[30px] border border-slate-100 bg-white shadow-sm">
         <TouchableOpacity
           className="flex-row items-center justify-between border-b border-slate-50 bg-slate-50/30 p-5"

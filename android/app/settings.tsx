@@ -1,14 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Settings, Database, RefreshCw, ShieldCheck } from 'lucide-react-native';
-import * as FileSystem from 'expo-file-system';
 import { usePortfolio } from '../hooks/usePortfolio';
 
 export default function SettingsPage() {
   const { exportData, importData, resetAllData } = usePortfolio();
 
   const handleImport = async () => {
-    // Usunięto przekazywanie danych do importData, bo hook sam pobiera plik
     const success = await importData();
     if (success) {
       Alert.alert('Sukces', 'Dane zostały pomyślnie zaimportowane!');
@@ -16,13 +14,12 @@ export default function SettingsPage() {
   };
 
   const handleExport = async () => {
-    // Usunięto logikę eksportu stąd, ponieważ jest ona w pełni obsłużona w hooku
     await exportData();
   };
 
   return (
     <ScrollView className="flex-1 bg-white p-4">
-      <View className="mb-12 mt-6">
+      <View className="mb-12">
         <View className="mb-2 flex-row items-center gap-2">
           <Settings color="#94a3b8" size={16} />
           <Text className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">

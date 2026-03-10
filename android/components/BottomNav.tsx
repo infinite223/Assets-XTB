@@ -47,7 +47,7 @@ const NavItem = ({ href, icon: Icon, active }: any) => (
 const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 40,
     width: '100%',
     alignItems: 'center',
   },

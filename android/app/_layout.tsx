@@ -11,6 +11,7 @@ import { UploadModal } from 'components/UploadModal';
 import { BottomNav } from 'components/BottomNav';
 import '../global.css';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
 export default function RootLayout() {
   const { addReport, addPlannedDividend } = usePortfolio();
@@ -55,7 +56,9 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }}>
-        <Slot />
+        <View style={{ flex: 1 }}>
+          <Slot />
+        </View>
         <BottomNav onFileSelect={handleFileSelect} />
         <UploadModal
           isOpen={isModalOpen}

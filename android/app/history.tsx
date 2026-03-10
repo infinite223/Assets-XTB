@@ -38,7 +38,7 @@ export default function HistoryPage() {
   );
 
   return (
-    <ScrollView className="flex-1 bg-slate-50 p-4">
+    <ScrollView className="flex-1 bg-slate-50 p-4" contentContainerStyle={{ paddingBottom: 120 }}>
       <View className="mb-8">
         <View className="mb-2 flex-row items-center gap-2">
           <History color="#6366f1" size={16} />
@@ -59,7 +59,9 @@ export default function HistoryPage() {
               year={year}
               stats={calculateYearlyStats(year)}
               count={Object.values(store.reports).filter((r) => r.year === year).length}
-              onClick={() => router.push(`/${year}` as any)}
+              onClick={() =>
+                router.push({ pathname: '/months', params: { year: year.toString() } })
+              }
             />
           ))}
         </View>

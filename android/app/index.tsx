@@ -84,19 +84,19 @@ export default function HomePage() {
   }
 
   return (
-    <ScrollView className="flex-1 bg-white p-4">
+    <ScrollView className="flex-1 bg-white p-4" contentContainerStyle={{ paddingBottom: 120 }}>
       <View className="mb-8">
         <Text className="text-xs font-black uppercase tracking-widest text-slate-400">
           Assets TRACK
         </Text>
-        <Text className="text-4xl font-black uppercase italic tracking-tighter text-slate-800">
+        <Text className="text-3xl font-black uppercase italic tracking-tighter text-slate-800">
           Podsumowanie Portfela
         </Text>
       </View>
 
-      <View className="mb-6 rounded-[40px] bg-slate-900 p-8">
-        <View className="mb-4 flex-row items-center gap-2">
-          <TrendingUp size={20} />
+      <View className="mb-6 rounded-[40px] bg-indigo-700 p-8">
+        <View className="mb-4 flex-row items-center gap-4">
+          <TrendingUp size={20} color={'white'} />
           <Text className="text-[11px] font-black uppercase tracking-widest text-indigo-200">
             Łączny zwrot
           </Text>

@@ -44,8 +44,7 @@ export default function DetailsPage() {
 
   return (
     <ScrollView className="flex-1 bg-slate-50" contentContainerStyle={{ paddingBottom: 40 }}>
-      {/* Header */}
-      <View className="flex-row items-center justify-between border-b border-slate-100 bg-white p-6 pt-14 shadow-sm">
+      <View className="flex-row items-center justify-between border-b border-slate-100 bg-white p-6 shadow-sm">
         <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2">
           <View className="h-10 w-10 items-center justify-center rounded-full border border-slate-100 bg-slate-50">
             <ArrowLeft size={16} color="#475569" />
@@ -66,7 +65,6 @@ export default function DetailsPage() {
       </View>
 
       <View className="p-4">
-        {/* Tu przekazujesz dane do komponentu Dashboard */}
         <Dashboard report={{ ...activeReport, monthlyNetGain: currentDelta }} />
       </View>
     </ScrollView>

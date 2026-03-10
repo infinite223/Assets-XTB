@@ -60,8 +60,7 @@ export default function months() {
 
   return (
     <ScrollView className="flex-1 bg-slate-50" contentContainerStyle={{ paddingBottom: 80 }}>
-      {/* Header */}
-      <View className="flex-row items-center justify-between border-b border-slate-100 bg-white p-6 pt-12">
+      <View className="flex-row items-center justify-between border-b border-slate-100 bg-white p-6">
         <TouchableOpacity onPress={() => router.back()} className="flex-row items-center gap-2">
           <View className="h-10 w-10 items-center justify-center rounded-full border border-slate-100 bg-slate-50">
             <ArrowLeft size={16} color="#475569" />
@@ -82,7 +81,12 @@ export default function months() {
                 ? (calculateMonthlyDelta(report) / report.totalInvested) * 100
                 : 0
             }
-            onClick={() => router.push(`/${year}/${report.month}` as any)}
+            onClick={() =>
+              router.push({
+                pathname: '/details',
+                params: { year: year.toString(), month: report.month.toString() },
+              })
+            }
           />
         ))}
 

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Dimensions } from 'react-native';
-import { Wallet, PieChart, TrendingUp, ChevronUp, ChevronDown } from 'lucide-react-native';
+import { View, Text, Dimensions } from 'react-native';
+import { Wallet, PieChart, TrendingUp } from 'lucide-react-native';
 import { BarChart } from 'react-native-chart-kit';
-import { MonthData, OpenPosition, SortOrder } from '../types';
+import { MonthData, SortOrder } from '../types';
 import { usePortfolio } from '../hooks/usePortfolio';
 
 type SortKeys = 'purchaseValue' | 'monthlyProfitDelta' | 'profit';
@@ -16,7 +16,7 @@ export default function Dashboard({ report }: DashboardProps) {
   const { positions, totalInvested, monthlyNetGain, year, month } = report;
   const screenWidth = Dimensions.get('window').width;
 
-  const [sortConfig, setSortConfig] = useState<{ key: SortKeys; order: SortOrder }>({
+  const [sortConfig] = useState<{ key: SortKeys; order: SortOrder }>({
     key: 'purchaseValue',
     order: 'desc',
   });
@@ -54,64 +54,89 @@ export default function Dashboard({ report }: DashboardProps) {
   };
 
   return (
-    <View className="flex-1 p-4">
-      {/* Wykres */}
-      <View className="mb-6 rounded-[30px] border border-slate-100 bg-white p-6">
-        <Text className="mb-4 flex-row items-center text-lg font-black">
-          <PieChart color="#6366f1" size={20} /> Alokacja
-        </Text>
+    <View className="flex-1">
+      <View className="mb-6 rounded-[30px] border border-slate-100 bg-white p-6 shadow-sm">
+        <View className="mb-4 flex-row items-center gap-2">
+          <PieChart color="#6366f1" size={20} />
+          <Text className="text-lg font-black text-slate-800">Alokacja</Text>
+        </View>
         <BarChart
           data={chartData}
           width={screenWidth - 64}
           height={220}
-          // Dodaj te dwa pola, aby spełnić wymogi TypeScripta:
           yAxisLabel=""
           yAxisSuffix=""
           chartConfig={{
             backgroundColor: '#fff',
             backgroundGradientFrom: '#fff',
             backgroundGradientTo: '#fff',
+            decimalPlaces: 0,
             color: (opacity = 1) => `rgba(99, 102, 241, ${opacity})`,
-            labelColor: (opacity = 1) => `rgba(148, 163, 184, ${opacity})`, // Opcjonalnie dodaj dla czytelności
+            labelColor: (opacity = 1) => `rgba(148, 163, 184, ${opacity})`,
+            style: { borderRadius: 16 },
+            propsForLabels: { fontSize: 10, fontWeight: '600' },
           }}
-          style={{ borderRadius: 16 }}
+          verticalLabelRotation={30}
+          style={{ marginVertical: 8, borderRadius: 16 }}
         />
       </View>
 
-      {/* Statystyki */}
-      <View className="mb-6 flex-row justify-between rounded-[30px] border border-slate-100 bg-white p-6">
+      <View className="mb-6 flex-row justify-between rounded-[30px] border border-slate-100 bg-white p-6 shadow-sm">
         <View>
-          <Text className="text-[10px] font-black uppercase text-slate-400">Portfel {year}</Text>
-          <Text className="text-2xl font-black">{totalInvested.toLocaleString()} PLN</Text>
+          <View className="mb-1 flex-row items-center gap-1">
+            <Wallet size={12} color="#94a3b8" />
+            <Text className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+              Portfel {year}
+            </Text>
+          </View>
+          <Text className="text-2xl font-black text-slate-800">
+            {totalInvested.toLocaleString()}{' '}
+            <Text className="text-sm font-bold text-slate-400">PLN</Text>
+          </Text>
         </View>
         <View className="items-end">
-          <Text className="text-[10px] font-black uppercase text-slate-400">Zysk netto</Text>
+          <View className="mb-1 flex-row items-center gap-1">
+            <TrendingUp size={12} color="#94a3b8" />
+            <Text className="text-[10px] font-black uppercase tracking-wider text-slate-400">
+              Zysk netto
+            </Text>
+          </View>
           <Text
             className={`text-2xl font-black ${monthlyNetGain >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
             {monthlyNetGain >= 0 ? '+' : ''}
-            {monthlyNetGain.toLocaleString()} PLN
+            {monthlyNetGain.toLocaleString()}{' '}
+            <Text className="text-sm font-bold opacity-60">PLN</Text>
           </Text>
         </View>
       </View>
 
-      {/* Lista Pozycji zamiast Tabeli */}
-      <FlatList
-        data={enrichedPositions}
-        keyExtractor={(item) => item.symbol}
-        renderItem={({ item }) => (
-          <View className="mb-3 flex-row items-center justify-between rounded-2xl border border-slate-100 bg-white p-4">
-            <Text className="text-lg font-black italic">{item.symbol}</Text>
+      <View className="gap-3">
+        <Text className="mb-1 ml-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+          Aktywne Pozycje
+        </Text>
+        {enrichedPositions.map((item) => (
+          <View
+            key={item.symbol}
+            className="flex-row items-center justify-between rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+            <View>
+              <Text className="text-lg font-black uppercase italic text-slate-800">
+                {item.symbol}
+              </Text>
+              <Text className="text-[10px] font-bold text-slate-400">OPEN POSITION</Text>
+            </View>
             <View className="items-end">
-              <Text className="font-bold">{item.purchaseValue.toLocaleString()} PLN</Text>
+              <Text className="font-bold text-slate-700">
+                {item.purchaseValue.toLocaleString()} PLN
+              </Text>
               <Text
-                className={`font-black ${item.monthlyProfitDelta >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                className={`text-xs font-black ${item.monthlyProfitDelta >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                 {item.monthlyProfitDelta >= 0 ? '+' : ''}
-                {item.monthlyProfitDelta.toLocaleString()}
+                {item.monthlyProfitDelta.toLocaleString()} <Text className="text-[8px]">M/M</Text>
               </Text>
             </View>
           </View>
-        )}
-      />
+        ))}
+      </View>
     </View>
   );
 }
